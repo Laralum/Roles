@@ -1,0 +1,10 @@
+[
+    {
+        "text": "Roles",
+        "route": "laralum::roles.index"
+    },
+    {
+        "text": "Create role",
+        "route": "laralum::roles.create"
+    }
+]
