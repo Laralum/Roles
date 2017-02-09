@@ -141,8 +141,7 @@ class RoleController extends Controller
 
         $role->deletePermissions($role->permissions);
 
-        // Users not yet done
-        // $role->deleteUsers($role->users);
+        $role->deleteUsers($role->users);
 
         $role->delete();
 

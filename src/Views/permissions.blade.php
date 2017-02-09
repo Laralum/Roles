@@ -9,7 +9,7 @@
                 <div class="card-block">
                     <form method="POST">
                         {{ csrf_field() }}
-                        <h4>Available Permissions</h4><br /><br />
+                        <h5>Available Permissions</h5><br />
                         <div class="row">
                             @foreach($permissions as $permission)
                                 @php $current = 0; $max = round($permissions->count() / 2); @endphp

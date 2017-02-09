@@ -89,6 +89,34 @@ class Role extends Model
     }
 
     /**
+     * Adds users into the role.
+     *
+     * @param array $users
+     */
+    public function addUsers($users)
+    {
+        foreach( $users as $user ) {
+            $this->addUser($user);
+        }
+
+        return true;
+    }
+
+    /**
+     * Adds permissions into the role.
+     *
+     * @param array $permissions
+     */
+    public function addPermissions($permissions)
+    {
+        foreach( $permissions as $permission ) {
+            $this->addPermission($permission);
+        }
+
+        return true;
+    }
+
+    /**
      * Deletes the specified role user.
      *
      * @param mixed $user
