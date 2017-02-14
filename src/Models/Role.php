@@ -29,7 +29,7 @@ class Role extends Model
     }
 
     /**
-     * Return all the role users.
+     * Return all the role permissions.
      */
     public function permissions()
     {
