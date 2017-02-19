@@ -1,0 +1,12 @@
+{
+    "items": [
+        {
+            "text": "Role List",
+            "route": "laralum::roles.index"
+        },
+        {
+            "text": "Create Role",
+            "route": "laralum::roles.create"
+        }
+    ]
+}
