@@ -39,11 +39,7 @@ class RoleController extends Controller
     {
         $this->doValidation($request);
 
-        Role::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'color' => $request->input('color'),
-        ]);
+        Role::create($request->all());
         return redirect()->route('laralum::roles.index')->with('success','Permission added!');
     }
 
@@ -68,9 +64,7 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $this->doValidation($request, $role->id);
-
         $role->update($request->all());
-
         return redirect()->route('laralum::roles.index')->with('success','Role edited!');
     }
 
