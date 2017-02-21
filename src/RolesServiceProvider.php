@@ -15,6 +15,8 @@ class RolesServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/Views', 'laralum_roles');
 
+        $this->loadTranslationsFrom(__DIR__.'/Translations', 'laralum_roles');
+
         if (!$this->app->routesAreCached()) {
             require __DIR__.'/Routes/web.php';
         }

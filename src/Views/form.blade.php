@@ -1,29 +1,41 @@
-<div class="row">
-    <div class="col-md-12 col-lg-6 offset-lg-3">
-        <div class="card shadow">
-            <div class="card-block">
-                <form action="{{$action}}" method="POST">
-                    {!! csrf_field() !!}
-                    @if(isset($method)) {{ method_field($method) }} @endif
-                    @php
-                        $fields = ['name', 'color'];
-                    @endphp
-                    @foreach ($fields as $field)
-                        <div class="form-group">
-                            <label for="{{ $field }}">{{ ucfirst($field) }}</label>
-                            <input type="text" name="{{ $field }}" value="{{ old($field, isset($role->$field) ? $role->$field : '' ) }}" class="form-control" id="{{ $field }}">
-                            <strong class="text-danger">{{ $errors->first($field) }}</strong>
-                        </div>
-                    @endforeach
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', isset($role->description) ? $role->description : '' ) }}</textarea>
-                        <strong class="text-danger">{{ $errors->first('description') }}</strong>
-                    </div>
-                    <a href="{{ $cancel }}" class="btn btn-warning float-left">Cancel</a>
-                    <button type="submit" class="btn btn-success float-right clickable">{{ $button }}</button>
-                </form>
+<div class="uk-container uk-container-large">
+    <div uk-grid>
+        <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"></div>
+        <div class="uk-width-1-1@s uk-width-3-5@l uk-width-1-3@xl">
+            <div class="uk-card uk-card-default">
+                <div class="uk-card-header">
+                    {{ $title }}
+                </div>
+                <div class="uk-card-body">
+                    <form method="POST" action="{{ $action }}" class="uk-form-stacked">
+                        {{ csrf_field() }}
+                        @if(isset($method)) {{ method_field($method) }} @endif
+                        <fieldset class="uk-fieldset">
+                            <div class="uk-margin">
+                                <label class="uk-form-label">@lang('laralum_roles::general.name')</label>
+                                <input value="{{ old('name', isset($role) ? $role->name : '') }}" name="name" class="uk-input" type="text" placeholder="@lang('laralum_roles::general.name')">
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label">@lang('laralum_roles::general.color')</label>
+                                <input value="{{ old('color', isset($role) ? $role->color : '') }}" name="color" class="uk-input" type="text" placeholder="@lang('laralum_roles::general.color')">
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label">@lang('laralum_roles::general.description')</label>
+                                <div class="uk-form-controls">
+                                    <textarea name="description" class="uk-textarea" rows="5" placeholder="@lang('laralum_roles::general.description')">{{ old('description', isset($role) ? $role->description : '') }}</textarea>
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <a href="{{ $cancel }}" class="uk-align-left uk-button uk-button-default">@lang('laralum_roles::general.cancel')</a>
+                                <button type="submit" class="uk-button uk-button-primary uk-align-right">
+                                    <span class="ion-forward"></span>&nbsp; {{ $button }}
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
+        <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"></div>
     </div>
 </div>

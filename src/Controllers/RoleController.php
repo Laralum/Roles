@@ -32,7 +32,7 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -50,32 +50,26 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param \Laralum\Roles\Models\Role $role
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        return view('laralum_roles::edit', ['role' => Role::findOrFail($id)]);
+        return view('laralum_roles::edit', ['role' => $role]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param \Laralum\Roles\Models\Role $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        $this->doValidation($request, $id);
+        $this->doValidation($request, $role->id);
 
-        $role = Role::findOrFail($id);
-
-        $role->update([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'color' => $request->input('color'),
-        ]);
+        $role->update($request->all());
 
         return redirect()->route('laralum::roles.index')->with('success','Role edited!');
     }
@@ -83,23 +77,23 @@ class RoleController extends Controller
     /**
      * Show / edit the role permissions.
      *
-     * @param int $id
+     * @param \Laralum\Roles\Models\Role $role
+     * @return \Illuminate\Http\Response
      */
-    public function permissions($id)
+    public function permissions(Role $role)
     {
-        $role = Role::findOrFail($id);
-
         return view('laralum_roles::permissions', ['permissions' => Permission::all(), 'role' => $role]);
     }
 
     /**
      * Update the role permissions.
      *
-     * @param int $role
+     * @param \Illuminate\Http\Request $request
+     * @param \Laralum\Roles\Models\Role $role
+     * @return \Illuminate\Http\Response
      */
-    public function updatePermissions($id, Request $request)
+    public function updatePermissions(Request $request, Role $role)
     {
-        $role = Role::findOrFail($id);
         $permissions = Permission::all();
 
         foreach($permissions as $permission) {
@@ -116,13 +110,11 @@ class RoleController extends Controller
     /**
      * Displays a view to confirm delete.
      *
-     * @param  int  $id
+     * @param \Laralum\Roles\Models\Role $role
      * @return \Illuminate\Http\Response
      */
-    public function confirmDelete($id)
+    public function confirmDelete(Role $role)
     {
-        $role = Role::findOrFail($id);
-
         return view('laralum::pages.confirmation', [
             'method' => 'DELETE',
             'action' => route('laralum::roles.destroy', ['role' => $role]),
@@ -132,15 +124,13 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param \Laralum\Roles\Models\Role $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy(Request $request, Role $role)
     {
-        $role = Role::findOrFail($id);
-
         $role->deletePermissions($role->permissions);
-
         $role->deleteUsers($role->users);
 
         $role->delete();
@@ -151,9 +141,9 @@ class RoleController extends Controller
     /**
      * Validate form of resource
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      **/
-    private function doValidation($request, $id = false)
+    private function doValidation($request)
     {
         $this->validate($request, [
             'name' => 'required|max:255',

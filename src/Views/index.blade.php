@@ -1,69 +1,55 @@
 @extends('laralum::layouts.master')
-@section('icon', 'mdi-svg')
-@section('title', 'Roles')
-@section('subtitle', 'Roles will allow you to bind users into categories creating independent permissions for each user.')
+@section('icon', 'ion-ribbon-b')
+@section('title', __('laralum_roles::general.role_list'))
+@section('subtitle', __('laralum_roles::general.roles_desc'))
+@section('breadcrumb')
+    <ul class="uk-breadcrumb">
+        <li><a href="{{ route('laralum::index') }}">@lang('laralum_roles::general.home')</a></li>
+        <li><span>@lang('laralum_roles::general.role_list')</span></li>
+    </ul>
+@endsection
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow">
-                <div class="card-block">
-                    <h5>Quick Actions</h5><br />
-                    <a class="btn btn-success" href="{{ route('laralum::roles.create') }}">Create Role</a>
-                    <a class="btn btn-primary disabled" href="#">Roles Settings</a>
-                    <br />
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col col-md-12">
-            <div class="card shadow">
-                <div class="card-block">
-                    @if ($roles->count() == 0)
-                        <center>
-                            <br /><br />
-                            <h3>There are no roles yet</h3>
-                            <h1 class="mdi mdi-emoticon-sad"></h1>
-                            <br />
-                        </center>
-                    @else
-                        <h5>Role list</h5><br />
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
+    <div class="uk-container uk-container-large">
+        <div uk-grid class="uk-child-width-1-1">
+            <div>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-header">
+                        @lang('laralum_roles::general.role_list')
+                    </div>
+                    <div class="uk-card-body">
+                        <div class="uk-overflow-auto">
+                            <table class="uk-table uk-table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Actions</th>
+                                        <th>@lang('laralum_roles::general.name')</th>
+                                        <th>@lang('laralum_roles::general.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($roles as $role)
+                                    @forelse( $roles as $role )
                                         <tr>
-                                            <th>{{ $role->id }}</th>
-                                            <td>
-                                                <span style="color: {{ $role->color }}">{{ $role->name }}</span>
-                                            </td>
-                                            <td>{{ $role->description }}</td>
-                                            <td>
-                                                <a href="{{ route('laralum::roles.edit', ['id' => $role->id]) }}" class="btn btn-primary btn-sm">
-                                                    <i class="mdi mdi-pencil"></i>
-                                                </a>
-                                                <a href="{{ route('laralum::roles.permissions', ['id' => $role->id]) }}" class="btn btn-primary btn-sm">
-                                                    <i class="mdi mdi-key-variant"></i>
-                                                </a>
-                                                <a href="{{ route('laralum::roles.destroy.confirm', ['id' => $role->id]) }}" class="btn btn-danger btn-sm">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </a>
+                                            <td>{{ $role->id }}</td>
+                                            <td style="color:{{ $role->color }}">{{ $role->name }}</td>
+                                            <td class="uk-table-shrink">
+                                                <div class="uk-button-group">
+                                                    <a href="{{ route('laralum::roles.edit', ['id' => $role->id]) }}" class="uk-button uk-button-small uk-button-default">@lang('laralum_roles::general.edit')</a>
+                                                    <a href="{{ route('laralum::roles.permissions', ['id' => $role->id]) }}" class="uk-button uk-button-small uk-button-default">@lang('laralum_roles::general.permissions')</a>
+                                                    <a href="{{ route('laralum::roles.destroy.confirm', ['ticket' => $role->id]) }}" class="uk-button uk-button-small uk-button-danger">@lang('laralum_roles::general.delete')</a>
+                                                </div>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>
