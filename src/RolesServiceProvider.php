@@ -78,6 +78,9 @@ class RolesServiceProvider extends ServiceProvider
         }
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
+
+        // Make sure the permissions are OK
+        PermissionsChecker::check($this->permissions);
     }
 
     /**
@@ -93,7 +96,7 @@ class RolesServiceProvider extends ServiceProvider
             Gate::policy($key, $value);
         }
     }
-    
+
     /**
      * Register the application services.
      *
