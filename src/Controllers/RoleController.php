@@ -26,6 +26,7 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Role::class);
         return view('laralum_roles::create');
     }
 
@@ -37,6 +38,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Role::class);
         $this->doValidation($request);
 
         Role::create($request->all());
@@ -51,6 +53,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $this->authorize('update', Role::class);
         return view('laralum_roles::edit', ['role' => $role]);
     }
 
@@ -63,6 +66,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        $this->authorize('update', Role::class);
         $this->doValidation($request, $role->id);
         $role->update($request->all());
         return redirect()->route('laralum::roles.index')->with('success','Role edited!');
@@ -76,6 +80,7 @@ class RoleController extends Controller
      */
     public function permissions(Role $role)
     {
+        $this->authorize('manage_permissions', Role::class);
         return view('laralum_roles::permissions', ['permissions' => Permission::all(), 'role' => $role]);
     }
 
@@ -88,6 +93,7 @@ class RoleController extends Controller
      */
     public function updatePermissions(Request $request, Role $role)
     {
+        $this->authorize('manage_permissions', Role::class);
         $permissions = Permission::all();
 
         foreach($permissions as $permission) {
@@ -109,6 +115,7 @@ class RoleController extends Controller
      */
     public function confirmDelete(Role $role)
     {
+        $this->authorize('delete', Role::class);
         return view('laralum::pages.confirmation', [
             'method' => 'DELETE',
             'action' => route('laralum::roles.destroy', ['role' => $role]),
@@ -124,6 +131,7 @@ class RoleController extends Controller
      */
     public function destroy(Request $request, Role $role)
     {
+        $this->authorize('delete', Role::class);
         $role->deletePermissions($role->permissions);
         $role->deleteUsers($role->users);
 

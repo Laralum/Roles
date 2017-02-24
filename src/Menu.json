@@ -1,11 +1,11 @@
 {
     "items": [
         {
-            "text": "Role List",
+            "trans": "laralum_roles::general.role_list",
             "route": "laralum::roles.index"
         },
         {
-            "text": "Create Role",
+            "trans": "laralum_roles::general.create_role",
             "route": "laralum::roles.create"
         }
     ]
