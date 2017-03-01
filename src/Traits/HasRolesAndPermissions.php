@@ -3,6 +3,7 @@
 namespace Laralum\Roles\Traits;
 
 use Laralum\Permissions\Traits\HasPermissions;
+use Laralum\Permissions\Models\Permission;
 
 trait HasRolesAndPermissions
 {
