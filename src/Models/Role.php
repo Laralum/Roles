@@ -3,9 +3,11 @@
 namespace Laralum\Roles\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laralum\Permissions\Traits\HasPermissions;
 
 class Role extends Model
 {
+    use HasPermissions;
     /**
      * The table associated with the model.
      *
@@ -26,14 +28,6 @@ class Role extends Model
     public function users()
     {
         return $this->belongsToMany('Laralum\Users\Models\User', 'laralum_role_user');
-    }
-
-    /**
-     * Return all the role permissions.
-     */
-    public function permissions()
-    {
-        return $this->belongsToMany('Laralum\Permissions\Models\Permission', 'laralum_permission_role');
     }
 
     /**
