@@ -39,10 +39,13 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', Role::class);
-        $this->doValidation($request);
-
+        $this->validate($request, [
+            'name'        => 'required|max:255',
+            'color'       => 'required',
+            'description' => 'required|max:500',
+        ]);
         Role::create($request->all());
-        return redirect()->route('laralum::roles.index')->with('success','Permission added!');
+        return redirect()->route('laralum::roles.index')->with('success',  __('laralum_roles::general.role_added'));
     }
 
     /**
@@ -67,9 +70,13 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $this->authorize('update', Role::class);
-        $this->doValidation($request, $role->id);
+        $this->validate($request, [
+            'name'        => 'required|max:255',
+            'color'       => 'required',
+            'description' => 'required|max:500',
+        ]);
         $role->update($request->all());
-        return redirect()->route('laralum::roles.index')->with('success','Role edited!');
+        return redirect()->route('laralum::roles.index')->with('success',  __('laralum_roles::general.role_updated', ['id' => $role->id]));
     }
 
     /**
@@ -104,7 +111,7 @@ class RoleController extends Controller
             }
         }
 
-        return redirect()->route('laralum::roles.index')->with('success', 'The role permissions have been updated');
+        return redirect()->route('laralum::roles.index')->with('success',  __('laralum_roles::general.role_permissions_updated', ['id' => $role->id]));
     }
 
     /**
@@ -137,20 +144,6 @@ class RoleController extends Controller
 
         $role->delete();
 
-        return redirect()->route('laralum::roles.index')->with('success','Role deleted!');
-    }
-
-    /**
-     * Validate form of resource
-     *
-     * @param \Illuminate\Http\Request $request
-     **/
-    private function doValidation($request)
-    {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'description' => 'required|max:500',
-            'color' => 'required',
-        ]);
+        return redirect()->route('laralum::roles.index')->with('success', __('laralum_roles::general.role_deleted', ['id' => $role->id]));
     }
 }
