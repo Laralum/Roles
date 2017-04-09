@@ -12,8 +12,7 @@
 @section('content')
     <div class="uk-container uk-container-large">
         <div uk-grid>
-            <div class="uk-width-1-1@s uk-width-1-5@l"></div>
-            <div class="uk-width-1-1@s uk-width-3-5@l">
+            <div class="uk-width-1-1">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-header">
                         @lang('laralum_roles::general.available_permissions')
@@ -23,15 +22,21 @@
                             {{ csrf_field() }}
                             @if(isset($method)) {{ method_field($method) }} @endif
                             <fieldset class="uk-fieldset">
-                                   <div uk-grid>
-                                       @foreach($permissions as $permission)
-                                           <div class="uk-width-1-1@m uk-width-1-2@l">
-                                               <label><input class="uk-checkbox" name="{{ $permission->id }}" type="checkbox"  @if($role->hasPermission($permission)) checked @endif> {{ $permission->name }}</label>
-                                               <div class="uk-text-meta">
-                                                   {{ $permission->description }}
-                                               </div>
-                                           </div>
-                                       @endforeach
+                                <div uk-grid>
+                                    <div class="uk-width-1-1">
+                                        <div class="uk-button-group">
+                                            <a href="#" id="checkAll" class="uk-button uk-button-default uk-button-small">Check All</a>
+                                            <a href="#" id="uncheckAll" class="uk-button uk-button-default uk-button-small">Unckeck All</a>
+                                        </div>
+                                    </div>
+                                        @foreach($permissions as $permission)
+                                            <div class="uk-width-1-1@m uk-width-1-3@l">
+                                                <label><input class="uk-checkbox perm-checkbox" name="{{ $permission->id }}" type="checkbox"  @if($role->hasPermission($permission)) checked @endif> {{ $permission->name }}</label>
+                                                <div class="uk-text-meta">
+                                                    {{ $permission->description }}
+                                                </div>
+                                            </div>
+                                        @endforeach
                                    </div>
                                    <div class="uk-margin">
                                        <a href="{{ route('laralum::roles.index') }}" class="uk-button uk-button-default"> @lang('laralum_roles::general.cancel')</a>
@@ -46,7 +51,22 @@
                     </div>
                 </div>
             </div>
-            <div class="uk-width-1-1@s uk-width-1-5@l"></div>
         </div>
     </div>
+@endsection
+@section('js')
+<script>
+    $(function() {
+        $('#checkAll').click(function() {
+            $('.perm-checkbox').each(function() {
+                $(this).prop('checked', true);
+            })
+        });
+        $('#uncheckAll').click(function() {
+            $('.perm-checkbox').each(function() {
+                $(this).prop('checked', false);
+            })
+        });
+    })
+</script>
 @endsection
