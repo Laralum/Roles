@@ -1,0 +1,10 @@
+[
+    {
+        "view": "laralum_roles::widgets.users",
+        "permission": "laralum::roles.access"
+    },
+    {
+        "view": "laralum_roles::widgets.permissions",
+        "permission": "laralum::roles.access"
+    }
+]
