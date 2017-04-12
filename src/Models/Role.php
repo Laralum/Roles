@@ -61,7 +61,7 @@ class Role extends Model
      */
     public function addUser($user)
     {
-        if( !$this->hasUser($user) ) {
+        if (!$this->hasUser($user)) {
             return RoleUser::create(['role_id' => $this->id, 'user_id' => $user->id]);
         }
 
@@ -75,7 +75,7 @@ class Role extends Model
      */
     public function addPermission($permission)
     {
-        if( !$this->hasPermission($permission) ) {
+        if (!$this->hasPermission($permission)) {
             return PermissionRole::create(['role_id' => $this->id, 'permission_id' => $permission->id]);
         }
 
@@ -89,7 +89,7 @@ class Role extends Model
      */
     public function addUsers($users)
     {
-        foreach( $users as $user ) {
+        foreach ($users as $user) {
             $this->addUser($user);
         }
 
@@ -103,7 +103,7 @@ class Role extends Model
      */
     public function addPermissions($permissions)
     {
-        foreach( $permissions as $permission ) {
+        foreach ($permissions as $permission) {
             $this->addPermission($permission);
         }
 
@@ -117,7 +117,7 @@ class Role extends Model
      */
     public function deleteUser($user)
     {
-        if( $this->hasUser($user) ) {
+        if ($this->hasUser($user)) {
             return RoleUser::where(
                     ['role_id' => $this->id, 'user_id' => $user->id]
                 )->first()->delete();
@@ -133,7 +133,7 @@ class Role extends Model
      */
     public function deletePermission($permission)
     {
-        if( $this->hasPermission($permission) ) {
+        if ($this->hasPermission($permission)) {
             return PermissionRole::where(
                     ['role_id' => $this->id, 'permission_id' => $permission->id]
                 )->first()->delete();
@@ -149,7 +149,7 @@ class Role extends Model
      */
     public function deleteUsers($users)
     {
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $this->deleteUser($user);
         }
 
@@ -163,7 +163,7 @@ class Role extends Model
      */
     public function deletePermissions($permissions)
     {
-        foreach($permissions as $permission) {
+        foreach ($permissions as $permission) {
             $this->deletePermission($permission);
         }
 

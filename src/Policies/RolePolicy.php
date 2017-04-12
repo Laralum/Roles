@@ -2,8 +2,8 @@
 
 namespace Laralum\Roles\Policies;
 
-use Laralum\Users\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Laralum\Users\Models\User;
 
 class RolePolicy
 {
@@ -25,7 +25,8 @@ class RolePolicy
     /**
      * Determine if the current user can access roles module.
      *
-     * @param  mixed $user
+     * @param mixed $user
+     *
      * @return bool
      */
     public function access($user)
@@ -33,11 +34,11 @@ class RolePolicy
         return User::findOrFail($user->id)->hasPermission('laralum::roles.access');
     }
 
-
     /**
      * Determine if the current user can create roles.
      *
-     * @param  mixed  $user
+     * @param mixed $user
+     *
      * @return bool
      */
     public function create($user)
@@ -48,7 +49,8 @@ class RolePolicy
     /**
      * Determine if the current user can update roles.
      *
-     * @param  mixed $user
+     * @param mixed $user
+     *
      * @return bool
      */
     public function update($user)
@@ -59,18 +61,20 @@ class RolePolicy
     /**
      * Determine if the current user can manage permissions from roles.
      *
-     * @param  mixed $user
+     * @param mixed $user
+     *
      * @return bool
      */
     public function manage_permissions($user)
     {
         return User::findOrFail($user->id)->hasPermission('laralum::roles.permissions');
     }
-    
+
     /**
      * Determine if the current user can delete roles.
      *
-     * @param  mixed $user
+     * @param mixed $user
+     *
      * @return bool
      */
     public function delete($user)

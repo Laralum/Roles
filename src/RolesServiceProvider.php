@@ -2,14 +2,11 @@
 
 namespace Laralum\Roles;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\Support\ServiceProvider;
+use Laralum\Permissions\PermissionsChecker;
 use Laralum\Roles\Models\Role;
 use Laralum\Roles\Policies\RolePolicy;
-
-use Laralum\Permissions\PermissionsChecker;
-
 
 class RolesServiceProvider extends ServiceProvider
 {
@@ -31,32 +28,32 @@ class RolesServiceProvider extends ServiceProvider
         [
             'name' => 'Roles Access',
             'slug' => 'laralum::roles.access',
-            'desc' => "Grants access to laralum/roles module",
+            'desc' => 'Grants access to laralum/roles module',
         ],
         [
             'name' => 'Create Roles',
             'slug' => 'laralum::roles.create',
-            'desc' => "Allows creating roles",
+            'desc' => 'Allows creating roles',
         ],
         [
             'name' => 'Update Roles',
             'slug' => 'laralum::roles.update',
-            'desc' => "Allows updating roles",
+            'desc' => 'Allows updating roles',
         ],
         [
             'name' => 'View Roles',
             'slug' => 'laralum::roles.view',
-            'desc' => "Allows previewing roles",
+            'desc' => 'Allows previewing roles',
         ],
         [
             'name' => 'Manage Role Permissions',
             'slug' => 'laralum::roles.permissions',
-            'desc' => "Allows mange permissions of roles",
+            'desc' => 'Allows mange permissions of roles',
         ],
         [
             'name' => 'Delete Roles',
             'slug' => 'laralum::roles.delete',
-            'desc' => "Allows delete roles",
+            'desc' => 'Allows delete roles',
         ],
     ];
 
@@ -84,7 +81,7 @@ class RolesServiceProvider extends ServiceProvider
     }
 
     /**
-     * I cheated this comes from the AuthServiceProvider extended by the App\Providers\AuthServiceProvider
+     * I cheated this comes from the AuthServiceProvider extended by the App\Providers\AuthServiceProvider.
      *
      * Register the application's policies.
      *
