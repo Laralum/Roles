@@ -2,7 +2,6 @@
 
 namespace Laralum\Roles\Traits;
 
-use Laralum\Permissions\Traits\HasPermissions;
 use Laralum\Permissions\Models\Permission;
 
 trait HasRolesAndPermissions
@@ -10,11 +9,12 @@ trait HasRolesAndPermissions
     use HasRoles;
 
     /**
-    * Returns true if the role has a permission.
-    *
-    * @param mixed $role
-    * @return bool
-    */
+     * Returns true if the role has a permission.
+     *
+     * @param mixed $role
+     *
+     * @return bool
+     */
     public function hasPermission($permission)
     {
         $permission = !is_string($permission) ?: Permission::where(['slug' => $permission])->first();

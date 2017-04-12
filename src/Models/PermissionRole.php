@@ -4,7 +4,7 @@ namespace Laralum\Roles\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class permissionRole extends Model
+class PermissionRole extends Model
 {
     /**
      * The table associated with the model.
