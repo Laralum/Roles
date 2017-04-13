@@ -1,10 +1,12 @@
 {
     "items": [
         {
+            "permission": "laralum::roles.access",
             "trans": "laralum_roles::general.role_list",
             "route": "laralum::roles.index"
         },
         {
+            "permission": "laralum::roles.create",
             "trans": "laralum_roles::general.create_role",
             "route": "laralum::roles.create"
         }
