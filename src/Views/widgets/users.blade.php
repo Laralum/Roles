@@ -4,8 +4,11 @@
         return $role->users->count();
     })->toArray();
 @endphp
-@if ( (count($values) > 0) and (collect($values)->sum() == 0) )
+@if ( count($values) <= 0 || collect($values)->sum() <= 0)
     <div style="height: 400px; position: relative;">
+        <center>
+            @lang('laralum_roles::general.role_users_c')
+        </center>
         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
             <center>
                 <i class="ion-sad-outline" style="font-size: 100px;"></i><br />
