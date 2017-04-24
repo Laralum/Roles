@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('laralum_roles::index', ['roles' => Role::all()]);
+        return view('laralum_roles::index', ['roles' => Role::paginate(50)]);
     }
 
     /**
