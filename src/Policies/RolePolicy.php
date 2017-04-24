@@ -53,7 +53,7 @@ class RolePolicy
      *
      * @return bool
      */
-    public function update($user)
+    public function update($user, $role)
     {
         return User::findOrFail($user->id)->hasPermission('laralum::roles.update');
     }
@@ -65,7 +65,7 @@ class RolePolicy
      *
      * @return bool
      */
-    public function manage_permissions($user)
+    public function manage_permissions($user, $role)
     {
         return User::findOrFail($user->id)->hasPermission('laralum::roles.permissions');
     }
@@ -77,7 +77,7 @@ class RolePolicy
      *
      * @return bool
      */
-    public function delete($user)
+    public function delete($user, $role)
     {
         return User::findOrFail($user->id)->hasPermission('laralum::roles.delete');
     }

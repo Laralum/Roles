@@ -33,9 +33,33 @@
                                             <td style="color:{{ $role->color }}">{{ $role->name }}</td>
                                             <td class="uk-table-shrink">
                                                 <div class="uk-button-group">
-                                                    <a href="{{ route('laralum::roles.edit', ['id' => $role->id]) }}" class="uk-button uk-button-small uk-button-default">@lang('laralum_roles::general.edit')</a>
-                                                    <a href="{{ route('laralum::roles.permissions', ['id' => $role->id]) }}" class="uk-button uk-button-small uk-button-default">@lang('laralum_roles::general.permissions')</a>
-                                                    <a href="{{ route('laralum::roles.destroy.confirm', ['ticket' => $role->id]) }}" class="uk-button uk-button-small uk-button-danger">@lang('laralum_roles::general.delete')</a>
+                                                    @can('update', $role)
+                                                        <a href="{{ route('laralum::roles.edit', ['id' => $role->id]) }}" class="uk-button uk-button-small uk-button-default">
+                                                            @lang('laralum_roles::general.edit')
+                                                        </a>
+                                                    @else
+                                                        <button disabled="disabled" class="uk-button uk-button-small uk-button-default uk-disabled">
+                                                            @lang('laralum_roles::general.edit')
+                                                        </button>
+                                                    @endcan
+                                                    @can('update', $role)
+                                                        <a href="{{ route('laralum::roles.permissions', ['id' => $role->id]) }}" class="uk-button uk-button-small uk-button-default">
+                                                            @lang('laralum_roles::general.permissions')
+                                                        </a>
+                                                    @else
+                                                        <button disabled="disabled" class="uk-button uk-button-small uk-button-default uk-disabled">
+                                                            @lang('laralum_roles::general.permissions')
+                                                        </button>
+                                                    @endcan
+                                                    @can('delete', $role)
+                                                        <a href="{{ route('laralum::roles.destroy.confirm', ['ticket' => $role->id]) }}" class="uk-button uk-button-small uk-button-danger">
+                                                            @lang('laralum_roles::general.delete')
+                                                        </a>
+                                                    @else
+                                                        <button disabled="disabled" class="uk-button uk-button-small uk-button-default uk-disabled">
+                                                            @lang('laralum_roles::general.delete')
+                                                        </button>
+                                                    @endcan
                                                 </div>
                                             </td>
                                         </tr>
