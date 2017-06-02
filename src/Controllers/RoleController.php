@@ -43,7 +43,7 @@ class RoleController extends Controller
         $this->authorize('create', Role::class);
         $this->validate($request, [
             'name'        => 'required|max:255',
-            'color'       => 'required',
+            'color'       => 'required|size:7',
             'description' => 'required|max:500',
         ]);
         Role::create($request->all());
@@ -78,7 +78,7 @@ class RoleController extends Controller
         $this->authorize('update', Role::class);
         $this->validate($request, [
             'name'        => 'required|max:255',
-            'color'       => 'required',
+            'color'       => 'required|size:7',
             'description' => 'required|max:500',
         ]);
         $role->update($request->all());

@@ -21,25 +21,22 @@
 					<div class="uk-card-body">
 						<form method="POST" action="{{ route('laralum::roles.store') }}" class="uk-form-stacked">
 							{{ csrf_field() }}
-							<fieldset class="uk-fieldset"> 
+							<fieldset class="uk-fieldset">
 								<div class="uk-margin">
 									<label class="uk-form-label">
-									<span class="uk-text-danger">*</span>
-									@lang('laralum_roles::general.name')
+										@lang('laralum_roles::general.name') <span class="uk-text-danger">*</span>
 									</label>
 									<input value="{{ old('name') }}" name="name" class="uk-input" type="text" placeholder="@lang('laralum_roles::general.name')">
 								</div>
 								<div class="uk-margin">
 									<label class="uk-form-label">
-									<span class="uk-text-danger">*</span>
-									@lang('laralum_roles::general.color')
+										@lang('laralum_roles::general.color') <span class="uk-text-danger">*</span>
 									</label>
 									<input value="{{ old('color') }}" name="color" class="uk-input" type="color" placeholder="@lang('laralum_roles::general.color')">
 								</div>
 								<div class="uk-margin">
 									<label class="uk-form-label">
-									<span class="uk-text-danger">*</span>
-									@lang('laralum_roles::general.description')
+										@lang('laralum_roles::general.description') <span class="uk-text-danger">*</span>
 									</label>
 									<div class="uk-form-controls">
 										<textarea name="description" class="uk-textarea" rows="5" placeholder="{{ __('laralum_roles::general.description') }}">{{ old('description', isset($role) ? $role->description : '') }}</textarea>
