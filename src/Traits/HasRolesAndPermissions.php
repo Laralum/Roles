@@ -19,6 +19,10 @@ trait HasRolesAndPermissions
     {
         $permission = !is_string($permission) ?: Permission::where(['slug' => $permission])->first();
         
+        if (config('laralum.superadmin_bypass_haspermission)) {
+            return true;
+        }
+        
         if ($permission) {
             foreach ($this->roles as $role) {
                 if ($role->hasPermission($permission)) {
