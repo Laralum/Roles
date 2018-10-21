@@ -15,13 +15,9 @@ trait HasRolesAndPermissions
      *
      * @return bool
      */
-    public function hasPermission($permission, $bypassIfSuperAdmin = false)
+    public function hasPermission($permission)
     {
         $permission = !is_string($permission) ?: Permission::where(['slug' => $permission])->first();
-        
-        if ($bypassIfSuperAdmin && $this->superAdmin()) {
-            return true;
-        }
         
         if ($permission) {
             foreach ($this->roles as $role) {
